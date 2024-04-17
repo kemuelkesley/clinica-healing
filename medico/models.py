@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 def is_medico(user):
@@ -31,3 +32,13 @@ class DadosMedico(models.Model):
 
     def __str__(self):
         return self.nome
+    
+
+class DatasAbertas(models.Model):
+    data = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    agendado = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.data)
+
