@@ -42,28 +42,28 @@
             
                 <div class="row">
                     
-                    
+                    {% for data_aberta in datas_abertas %}
                         <div class="col-md-3">
-                            <a class="link" href="">
+                            <a class="link" href="{% url "agendar_horario" data_aberta.id %}">
                             <div class='selecionar-dia'>
                             <div class="header-dias">
                                 <span class="mes">
-                                mes
+                                    {{ data_aberta.data|date:"F" }}
                                 </span>
                                 
                                 <span class="dia-semana">
-                                semana
+                                    {{ data_aberta.data|date:"l" }}
                                 </span>
                             </div>
             
                             <div class="conteudo-data">
-                                data
+                                {{data_aberta.data}}
                             </div>
                             </div>
                         </a>
                         <br>
                         </div>
-                   
+                    {% endfor %}        
                     
                 </div>
 
