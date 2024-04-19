@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from medico.models import DadosMedico, Especialidades, DatasAbertas
+from medico.models import DadosMedico, Especialidades, DatasAbertas, is_medico
 from . models import Consulta
 from django.contrib import messages
 from django.contrib.messages import constants
@@ -22,7 +22,7 @@ def home(request):
             medicos = medicos.filter(especialidade_id__in=especialidades_filtrar)    
 
         especialidades = Especialidades.objects.all()
-        return render(request, 'home.html', {'medicos' : medicos, 'especialidades' : especialidades})
+        return render(request, 'home.html', {'medicos' : medicos, 'especialidades' : especialidades, 'is_medico': is_medico(request.user)})
     
 
 
@@ -31,7 +31,7 @@ def escolher_horario(request, id_dados_medicos):
         medico = DadosMedico.objects.get(id=id_dados_medicos)
         datas_abertas = DatasAbertas.objects.filter(user=medico.user).filter(data__gte=datetime.now()).filter(agendado=False)
 
-        return render(request, 'escolher_horario.html', {'medico' : medico, 'datas_abertas' : datas_abertas})
+        return render(request, 'escolher_horario.html', {'medico' : medico, 'datas_abertas' : datas_abertas, 'is_medico': is_medico(request.user)})
 
 
 def agendar_horario(request, id_data_aberta):
@@ -56,4 +56,4 @@ def minhas_consultas(request):
     # Realizar os filtros
     minhas_consultas = Consulta.objects.filter(paciente=request.user).filter(data_aberta__data__gte=datetime.now())
 
-    return render(request, 'minhas_consultas.html', {'minhas_consultas' : minhas_consultas})
+    return render(request, 'minhas_consultas.html', {'minhas_consultas' : minhas_consultas, 'is_medico': is_medico(request.user)})
