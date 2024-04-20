@@ -10,7 +10,7 @@ class Consulta(models.Model):
         ('A', 'Agendado'),
         ('F', 'Finalizado'),
         ('C', 'Cancelado'),
-        ('i', 'Iniciado')
+        ('I', 'Iniciado')
     )
 
     paciente = models.ForeignKey(User, on_delete=models.DO_NOTHING)

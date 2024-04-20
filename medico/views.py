@@ -104,3 +104,15 @@ def consultas_medico(request):
     print(consultas_hoje.values)
     
     return render(request, 'consultas_medico.html', {'consultas_hoje' : consultas_hoje, 'consultas_restantes': consultas_restantes, 'is_medico': is_medico(request.user)})
+
+
+
+def consulta_area_medico(request, id_consulta):
+    if not is_medico(request.user):
+        messages.add_message(request, constants.WARNING, 'Somente médicos podem acessar essa página.')
+        return redirect('/usuarios/sair')
+    
+
+    if request.method == "GET":
+        consulta = Consulta.objects.get(id=id_consulta)
+        return render(request, 'consulta_area_medico.html', {'consulta': consulta,'is_medico': is_medico(request.user)}) 
