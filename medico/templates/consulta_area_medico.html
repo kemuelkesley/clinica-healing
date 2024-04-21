@@ -68,13 +68,12 @@
                 <hr>
                 <h3 class="p-bold">Como acessar ?</h3>
                 <p>Adicione o link do google meet para iniciar a consulta</p>
-                <form action="" method="POST">{% csrf_token %}
-                    <input type="text" name="link" class="form-control shadow-main-color" id="" placeholder="Link ..." value="">
+                <form action="{% url "consulta_area_medico" consulta.id %}" method="POST">{% csrf_token %}
+                    <input type="text" name="link" class="form-control shadow-main-color" id="" placeholder="Link ..." value="{% if consulta.link %}{{consulta.link}}{% endif %}">
                     <br>
-                    <input type="submit" class="btn btn-success btn-dark-color btn-lg">
+                    <input type="submit" class="btn btn-success btn-dark-color btn-lg" value="Iniciar Consulta">
                 </form>
-                
-                
+               
                     
                 <hr>
                 
