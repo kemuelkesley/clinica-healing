@@ -95,10 +95,10 @@
                 <hr>
                     {% for documento in documentos %}
                     <br>
-                    <div class="d-grid gap-3">
-                        <a href="{{documento.documento.url}}" class="link documentos gap-3" target="blank"><i class="bi bi-file-arrow-down"></i> {{documento.titulo}} - {{documento.consulta.data_aberta.data.year}}</a>               
+                        <div class="d-grid gap-3">
+                            <a href="{{documento.documento.url}}" class="link documentos gap-3" target="blank"><i class="bi bi-file-arrow-down"></i> {{documento.titulo}} - {{documento.consulta.data_aberta.data.year}}</a>               
 
-                    </div>
+                        </div>
                     {% endfor %}                               
                 <hr>
                 <a href="" class="btn btn-primary">Finalizar consulta</a>

@@ -2,7 +2,7 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from medico.models import DadosMedico, Especialidades, DatasAbertas, is_medico
-from . models import Consulta
+from . models import Consulta, DatasAbertas, Documento
 from django.contrib import messages
 from django.contrib.messages import constants
 # Create your views here.
@@ -63,4 +63,5 @@ def consulta(request, id_consulta):
     if request.method == "GET":
         consulta = Consulta.objects.get(id=id_consulta)
         dado_medico = DadosMedico.objects.get(user=consulta.data_aberta.user)
-        return render(request, 'consulta.html', {'consulta' : consulta, 'dado_medico' : dado_medico})
+        documentos = Documento.objects.filter(consulta=consulta)
+        return render(request, 'consulta_area_medico.html', {'consulta': consulta, 'documentos': documentos,'is_medico': is_medico(request.user)}) 
