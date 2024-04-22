@@ -6,9 +6,9 @@ sem usar esse framework.
 
 
 ## Tecnologias ultilizadas:
--
--
--
+- Python
+- Django 5.0
+- Html, css
 
 ## Como rodar o projeto:
 
